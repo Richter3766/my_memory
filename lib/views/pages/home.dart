@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_bar/home_app_bar.dart';
 import '../widgets/post/post_list.dart';
+import '../widgets/bottom_bar/bottom_bar.dart';
+import '../widgets/bottom_bar/button/post_btn.dart';
+import '../widgets/bottom_bar/bottom_bar_handler.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,8 +33,16 @@ class MainPage extends StatelessWidget {
           Expanded(child: PostList()),
         ],
       ),
+
+      bottomNavigationBar: CustomBottomAppBar(
+        calendarBtnHandler: moveToCalendarPage,
+        profileBtnHandler: moveToProfilePage
+        ),
+
+      floatingActionButton: CustomFloatingActionButton(
+        postBtnHandler: moveToPostPage
+        ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
-
-
