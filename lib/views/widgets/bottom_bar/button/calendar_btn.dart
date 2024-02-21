@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:my_memory/views/pages/home.dart';
 
 class CalendarIconButton extends StatelessWidget {
-  final Function tapHandler;
-
-  const CalendarIconButton({super.key, required this.tapHandler});
+  const CalendarIconButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: const Icon(Icons.calendar_today),
-      onPressed: () => tapHandler(),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+      },
     );
   }
 }

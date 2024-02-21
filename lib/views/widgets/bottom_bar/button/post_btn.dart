@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_memory/views/pages/post.dart';
 
 class CustomFloatingActionButton extends StatelessWidget {
-  final Function postBtnHandler;
-
-  const CustomFloatingActionButton({super.key, required this.postBtnHandler});
+  const CustomFloatingActionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       child: const Icon(Icons.add),
-      onPressed: () => postBtnHandler(),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PostPage()),
+      )
     );
   }
 }
