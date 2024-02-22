@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 
+import '../../../../services/db_service.dart';
+import '../../post/post_item.dart';
+
 class PostSaveButton extends StatelessWidget {
-  const PostSaveButton({super.key});
+  final TextEditingController titleController;
+  final TextEditingController contentController;
+  final PostItem? postItem;
+
+  const PostSaveButton({super.key,
+    required this.titleController,
+    required this.contentController,
+    this.postItem});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // 저장 기능
-      },
+      onPressed: () {DatabaseHelper.instance
+          .savePost(titleController, contentController, postItem)
+          .then((result){
+        // Navigator.pushReplacementNamed(context, '/home');
+        Navigator.pop(context);
+          });
+        },
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white, backgroundColor: Colors.blue, // 버튼 텍스트 색상
+        foregroundColor: Colors.white, backgroundColor: Colors.blue
       ),
       child: const Text('SAVE'),
     );

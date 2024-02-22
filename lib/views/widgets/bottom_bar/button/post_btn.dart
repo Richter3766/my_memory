@@ -10,7 +10,7 @@ class CustomFloatingActionButton extends StatelessWidget {
       child: const Icon(Icons.add),
       onPressed: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PostPage()),
+        MaterialPageRoute(builder: (context) => const PostPage()),
       )
     );
   }

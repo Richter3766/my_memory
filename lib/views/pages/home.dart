@@ -10,12 +10,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/home',
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const MainPage(),
+      routes: {
+        '/home': (context) => const MainPage(),
+      },
     );
   }
 }
@@ -27,11 +30,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: HomeAppBar(),
-      body: Column(
-        children: <Widget>[
-          Expanded(child: PostList()),
-        ],
-      ),
+      body: PostList(),
 
       bottomNavigationBar: CustomBottomAppBar(),
 

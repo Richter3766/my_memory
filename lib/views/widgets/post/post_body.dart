@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:my_memory/views/widgets/post/post_item.dart';
 
 class PostBody extends StatefulWidget {
-  const PostBody({super.key});
+  final TextEditingController titleController;
+  final TextEditingController contentController;
+  final PostItem? postItem;
+  const PostBody({super.key, required this.titleController,
+    required this.contentController,
+  this.postItem});
 
   @override
-  PostBodyState createState() => PostBodyState();
+  State<StatefulWidget> createState() => _PostBodyState();
+
 }
 
-class PostBodyState extends State<PostBody>{
-  late final TextEditingController _titleController;
-  late final TextEditingController _contentController;
+class _PostBodyState extends State<PostBody>{
   @override
   void initState() {
+    widget.titleController.text = widget.postItem?.title ?? '';
+    widget.contentController.text = widget.postItem?.content ?? '';
     super.initState();
-    _titleController = TextEditingController(); // 컨트롤러 초기화
-    _contentController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _titleController.dispose(); // 컨트롤러 해제
-    _contentController.dispose();
-    super.dispose();
   }
 
   @override
@@ -44,13 +42,13 @@ class PostBodyState extends State<PostBody>{
             },
           ),
           TextField(
-            controller: _titleController,
+            controller: widget.titleController,
             decoration: const InputDecoration(
-              border: InputBorder.none,
-              hintText: '제목',
-              hintStyle: TextStyle(
-                fontSize: 20
-              )
+                border: InputBorder.none,
+                hintText: '제목',
+                hintStyle: TextStyle(
+                    fontSize: 20
+                )
 
             ),
             style: const TextStyle(
@@ -60,10 +58,10 @@ class PostBodyState extends State<PostBody>{
           Expanded(
             child: TextField(
               maxLines: null,
-              controller: _contentController,
+              controller: widget.contentController,
               decoration: const InputDecoration(
-                border: InputBorder.none,
-                hintText: '여기에 자세히 써주세요'
+                  border: InputBorder.none,
+                  hintText: '여기에 자세히 써주세요'
               ),
             ),
           )
@@ -72,4 +70,3 @@ class PostBodyState extends State<PostBody>{
     );
   }
 }
-

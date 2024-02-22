@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
 class PostItem extends StatelessWidget {
-  final String date;
+  final int id;
+  final String title;
   final String content;
-  final IconData moodIcon;
 
-  const PostItem({super.key, required this.date, required this.content, required this.moodIcon});
+  const PostItem({super.key,
+    required this.title,
+    required this.content,
+    required this.id});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(date),
+      title: Text(title),
       subtitle: Text(content),
-      trailing: Icon(moodIcon),
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'content': content,
+    };
   }
 }
