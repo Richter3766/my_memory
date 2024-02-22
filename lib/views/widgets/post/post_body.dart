@@ -46,17 +46,30 @@ class PostBodyState extends State<PostBody>{
           TextField(
             controller: _titleController,
             decoration: const InputDecoration(
-              hintText: 'Title',
+              border: InputBorder.none,
+              hintText: '제목',
+              hintStyle: TextStyle(
+                fontSize: 20
+              )
+
+            ),
+            style: const TextStyle(
+              fontSize: 20,
             ),
           ),
-          TextField(
-            controller: _contentController,
-            decoration: const InputDecoration(
-              hintText: 'Write more here...',
+          Expanded(
+            child: TextField(
+              maxLines: null,
+              controller: _contentController,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                hintText: '여기에 자세히 써주세요'
+              ),
             ),
-          ),
+          )
         ],
-      ),);
+      ),
+    );
   }
 }
 
