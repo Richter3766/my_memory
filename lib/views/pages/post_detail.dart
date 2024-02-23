@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
 import 'package:my_memory/views/widgets/post/post_item.dart';
 
-import '../../pages/post.dart';
+import 'post.dart';
 
 class DetailPage extends StatefulWidget {
   final PostItem postItem;
@@ -65,7 +65,11 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               );
               futurePostItem = loadPostItem();
-              setState(() {});
+              if (mounted) {
+                setState(() {
+                  // 상태 업데이트
+                });
+              }
             },
           ),
         ],

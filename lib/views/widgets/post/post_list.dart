@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
-import 'package:my_memory/views/widgets/post/post_detail.dart';
+import 'package:my_memory/views/pages/post_detail.dart';
 import './post_item.dart';
 
 class PostList extends StatefulWidget {
