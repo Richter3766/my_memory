@@ -56,6 +56,12 @@ class _DetailPageState extends State<DetailPage> {
         title: Text(postItem.title),
         actions: <Widget>[
           IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: (){
+              showDeleteConfirmDialog(context);
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.edit),
             onPressed: () async {
               await Navigator.push(
@@ -80,6 +86,34 @@ class _DetailPageState extends State<DetailPage> {
           Text(postItem.content),
         ],
       ),
+    );
+  }
+
+  void showDeleteConfirmDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('삭제 확인'),
+          content: Text('정말 기억을 지우시겠습니까?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('아니오'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            TextButton(
+              child: Text('네'),
+              onPressed: () {
+                DatabaseHelper.instance.delete(widget.postItem.id); // 데이터베이스에서 항목을 삭제하는 함수
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

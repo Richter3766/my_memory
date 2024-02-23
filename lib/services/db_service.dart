@@ -106,5 +106,12 @@ class DatabaseHelper {
     )).toList();
     return postItems;
   }
-
+  Future<void> delete(int id) async{
+    Database db = await instance.database;
+    await db.delete(
+      table,
+      where: '_id = ?',
+      whereArgs: [id],
+    );
+  }
 }
