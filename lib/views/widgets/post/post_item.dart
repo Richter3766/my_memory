@@ -20,9 +20,10 @@ class PostItem extends StatelessWidget {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'title': title,
-      'content': content,
+      'columnId': id,
+      'columnTitle': title,
+      'columnContent': content,
     };
   }
+
 }

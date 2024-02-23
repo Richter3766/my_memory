@@ -36,8 +36,8 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
-            $columnTitle TEXT NOT NULL DEFAULT "제목없음",
-            $columnContent TEXT NOT NULL DEFAULT "빈 내용"
+            $columnTitle TEXT NOT NULL DEFAULT "",
+            $columnContent TEXT NOT NULL DEFAULT ""
           )
           ''');
   }
@@ -47,14 +47,28 @@ class DatabaseHelper {
     return await db.insert(table, row);
   }
 
-  Future<int> update(PostItem item) async {
+  Future<Map<String, Object?>> select(int id) async {
+    Database db = await instance.database;
+    final result = await db.query(
+        table,
+        where: '_id = ?',
+        whereArgs: [id]
+    );
+    if (result.isNotEmpty) {
+      return result.first; // 첫 번째 요소 반환
+    } else {
+      throw Exception('No record found with id: $id');
+    }
+  }
+
+  Future<int> update(int id, String title, String content) async {
     Database db = await instance.database;
 
     return await db.update(
       table,
-      item.toMap(),
-      where: '$columnId = ?',
-      whereArgs: [item.id],
+      {'title': title, 'content': content},
+      where: '_id = ?',
+      whereArgs: [id],
     );
   }
   Future<List<Map<String, dynamic>>> queryAllRows() async {
@@ -78,7 +92,8 @@ class DatabaseHelper {
       });
     } else {
       // id가 있으면 기존의 PostItem을 수정
-      await DatabaseHelper.instance.update(postItem);
+      await DatabaseHelper.instance
+          .update(postItem.id, titleText, contentText);
     }
   }
 
