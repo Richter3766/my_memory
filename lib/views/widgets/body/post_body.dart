@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_memory/models/post_item.dart';
 
 class PostBody extends StatefulWidget {
@@ -15,31 +16,46 @@ class PostBody extends StatefulWidget {
 }
 
 class _PostBodyState extends State<PostBody>{
+  late DateTime _selectedDate;
   @override
   void initState() {
+    _selectedDate = DateTime.now();
     widget.titleController.text = widget.postItem?.title ?? '';
     widget.contentController.text = widget.postItem?.content ?? '';
     super.initState();
   }
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate,
+        firstDate: DateTime(2000, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return  Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          DropdownButton<String>(
-            items: <String>['Feb 2024', 'Mar 2024', 'Apr 2024'].map((
-                String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-            onChanged: (_) {
-              // 날짜 변경 기능
+          TextButton(
+            onPressed: () {
+              _selectDate(context);
             },
+            child: Text(
+                DateFormat('M월 d일').format(_selectedDate),
+              style: const TextStyle(
+                fontSize: 24
+              ),
+            ),
+
           ),
           TextField(
             controller: widget.titleController,
@@ -69,4 +85,5 @@ class _PostBodyState extends State<PostBody>{
       ),
     );
   }
+
 }

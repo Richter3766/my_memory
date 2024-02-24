@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import '../widgets/app_bar/home_app_bar.dart';
 import '../widgets/body/home_body.dart';
 import '../widgets/bottom_bar/home_bottom_bar.dart';
@@ -16,6 +17,12 @@ class HomePage extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [Locale('ko', 'KR')],
       routes: {
         '/home': (context) => const MainPage(),
       },
