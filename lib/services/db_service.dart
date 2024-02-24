@@ -13,6 +13,7 @@ class DatabaseHelper {
   static const columnId = '_id';
   static const columnTitle = 'title';
   static const columnContent = 'content';
+  static const columnDate = 'date';
 
   // DatabaseHelper 클래스를 싱글톤으로 만들기
   DatabaseHelper._privateConstructor();
@@ -36,8 +37,9 @@ class DatabaseHelper {
     await db.execute('''
           CREATE TABLE $table (
             $columnId INTEGER PRIMARY KEY,
-            $columnTitle TEXT NOT NULL DEFAULT "",
-            $columnContent TEXT NOT NULL DEFAULT ""
+            $columnTitle TEXT NOT NULL DEFAULT "이름 없는 기억",
+            $columnContent TEXT NOT NULL DEFAULT "",
+            $columnDate TEXT NOT NULL
           )
           ''');
   }
@@ -61,12 +63,14 @@ class DatabaseHelper {
     }
   }
 
-  Future<int> update(int id, String title, String content) async {
+  Future<int> update(int id, String title, String content, String date) async {
     Database db = await instance.database;
 
     return await db.update(
       table,
-      {'title': title, 'content': content},
+      {'title': title,
+        'content': content,
+        'date' : date},
       where: '_id = ?',
       whereArgs: [id],
     );
@@ -80,20 +84,26 @@ class DatabaseHelper {
       TextEditingController titleController,
       TextEditingController contentController,
       PostItem? postItem,
+      String date
       ) async {
     var titleText = titleController.text;
     var contentText = contentController.text;
+
+    if (titleText == ""){
+      titleText = "이름 없는 기억";
+    }
 
     if (postItem == null) {
       // id가 없으면 새로운 PostItem을 추가
       await DatabaseHelper.instance.insert({
         DatabaseHelper.columnTitle: titleText,
         DatabaseHelper.columnContent: contentText,
+        DatabaseHelper.columnDate: date
       });
     } else {
       // id가 있으면 기존의 PostItem을 수정
       await DatabaseHelper.instance
-          .update(postItem.id, titleText, contentText);
+          .update(postItem.id, titleText, contentText, date);
     }
   }
 
@@ -102,7 +112,8 @@ class DatabaseHelper {
     List<PostItem> postItems = rows.map((row) => PostItem(
         id: row[columnId],
         title: row[columnTitle],
-        content: row[columnContent]
+        content: row[columnContent],
+        date: row[columnDate],
     )).toList();
     return postItems;
   }

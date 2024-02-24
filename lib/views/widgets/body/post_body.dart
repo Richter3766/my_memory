@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_memory/models/post_item.dart';
+import 'package:provider/provider.dart';
+
+import '../../../models/selected_date.dart';
 
 class PostBody extends StatefulWidget {
   final TextEditingController titleController;
@@ -17,12 +20,19 @@ class PostBody extends StatefulWidget {
 
 class _PostBodyState extends State<PostBody>{
   late DateTime _selectedDate;
+  late DateModel model;
   @override
   void initState() {
     _selectedDate = DateTime.now();
     widget.titleController.text = widget.postItem?.title ?? '';
     widget.contentController.text = widget.postItem?.content ?? '';
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    model = Provider.of<DateModel>(context);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -34,6 +44,7 @@ class _PostBodyState extends State<PostBody>{
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
+        model.dateString = _selectedDate;
       });
     }
   }
@@ -50,7 +61,7 @@ class _PostBodyState extends State<PostBody>{
               _selectDate(context);
             },
             child: Text(
-                DateFormat('M월 d일').format(_selectedDate),
+                model.date,
               style: const TextStyle(
                 fontSize: 24
               ),

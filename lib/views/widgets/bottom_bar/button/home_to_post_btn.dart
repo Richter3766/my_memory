@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/pages/post.dart';
+import 'package:my_memory/views/pages/post_page.dart';
 
 class HomeToPostButton extends StatelessWidget {
   const HomeToPostButton({super.key});

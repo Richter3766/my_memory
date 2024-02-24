@@ -4,17 +4,19 @@ class PostItem extends StatelessWidget {
   final int id;
   final String title;
   final String content;
+  final String date;
 
   const PostItem({super.key,
     required this.title,
     required this.content,
-    required this.id});
+    required this.id,
+    required this.date});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(title),
-      subtitle: Text(content),
+      title: Text(date),
+      subtitle: Text(title),
     );
   }
 
@@ -23,6 +25,7 @@ class PostItem extends StatelessWidget {
       'columnId': id,
       'columnTitle': title,
       'columnContent': content,
+      'columnDate' : date,
     };
   }
 

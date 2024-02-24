@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
 import 'package:my_memory/models/post_item.dart';
 
-import 'post.dart';
+import 'post_page.dart';
 
 class DetailPage extends StatefulWidget {
   final PostItem postItem;
@@ -22,6 +22,7 @@ class _DetailPageState extends State<DetailPage> {
       id: map['_id'] as int,
       title: map['title'] as String,
       content: map['content'] as String,
+      date: map['date'] as String,
     );
   }
 

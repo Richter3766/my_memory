@@ -2,14 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:my_memory/models/post_item.dart';
+import 'package:provider/provider.dart';
 
+import '../../models/db_state.dart';
+import '../../models/selected_date.dart';
 import '../../services/db_service.dart';
 import '../widgets/app_bar/post_app_bar.dart';
 import '../widgets/body/post_body.dart';
 
 class PostPage extends StatefulWidget{
   final PostItem? postItem;
-
   const PostPage({super.key, this.postItem});
 
   @override
@@ -18,6 +20,16 @@ class PostPage extends StatefulWidget{
 class _PostPageState extends State<PostPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +53,8 @@ class _PostPageState extends State<PostPage> {
   }
 
   Future _onPopInvoked() {
+    var model = Provider.of<DateModel>(context, listen: false);
+    final databaseState = Provider.of<DatabaseState>(context, listen: false);
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -58,10 +72,15 @@ class _PostPageState extends State<PostPage> {
             TextButton(
               onPressed: () {
                 // '예'를 눌렀을 때의 동작
-                // 현재 내용을 DB에 저장하는 코드가 필요합니다.
                 DatabaseHelper.instance
-                    .savePost(titleController, contentController, widget.postItem).
+                    .savePost(
+                    titleController,
+                    contentController,
+                    widget.postItem,
+                    model.date
+                ).
                 then((result){
+                  databaseState.refresh();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 });

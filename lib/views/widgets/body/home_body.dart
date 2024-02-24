@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
 import 'package:my_memory/views/pages/post_detail.dart';
+import 'package:provider/provider.dart';
+import '../../../models/db_state.dart';
 import '../../../models/post_item.dart';
 
 class HomeBody extends StatefulWidget {
@@ -13,6 +15,8 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody>{
   @override
   Widget build(BuildContext context){
+    final databaseState = Provider.of<DatabaseState>(context);
+
     return FutureBuilder<List<PostItem>>(
       future: DatabaseHelper.instance.getAllPostItems(),
       builder: (context, snapshot) {
@@ -27,11 +31,11 @@ class _HomeBodyState extends State<HomeBody>{
                       builder: (context) => DetailPage(postItem: postItem),
                     ),
                   );
-                  setState(() {});
+                  databaseState.refresh();
                 },
                 child: ListTile(
-                  title: Text(postItem.title),
-                  subtitle: Text(postItem.content),
+                  title: Text(postItem.date),
+                  subtitle: Text(postItem.title),
                 ),
               );
             }).toList(),
