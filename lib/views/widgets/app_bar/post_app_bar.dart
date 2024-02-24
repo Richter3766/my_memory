@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/views/widgets/app_bar/button/post_popup_btn.dart';
 import 'package:my_memory/views/widgets/app_bar/button/post_save_btn.dart';
-import 'package:my_memory/views/widgets/post/post_item.dart';
+import 'package:my_memory/models/post_item.dart';
 
 class PostAppBar extends StatelessWidget implements PreferredSizeWidget{
   final TextEditingController titleController;

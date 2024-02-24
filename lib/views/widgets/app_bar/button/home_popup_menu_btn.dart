@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomPopupMenuButton extends StatelessWidget {
-  const CustomPopupMenuButton({super.key});
+class HomePopupMenuButton extends StatelessWidget {
+  const HomePopupMenuButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/widgets/post/post_item.dart';
+import 'package:my_memory/models/post_item.dart';
 
 import '../../services/db_service.dart';
 import '../widgets/app_bar/post_app_bar.dart';
-import '../widgets/post/post_body.dart';
+import '../widgets/body/post_body.dart';
 
 class PostPage extends StatefulWidget{
   final PostItem? postItem;
@@ -19,7 +19,28 @@ class _PostPageState extends State<PostPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
 
-  Future _onWillPop() {
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (canPop) async {
+        await _onPopInvoked();
+        },
+      child: Scaffold(
+        appBar: PostAppBar(
+            titleController: titleController,
+            contentController: contentController,
+            postItem: widget.postItem),
+        body: PostBody(
+          titleController: titleController,
+          contentController: contentController,
+          postItem: widget.postItem,
+        ),
+      ),
+    );
+  }
+
+  Future _onPopInvoked() {
     return showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -48,27 +69,7 @@ class _PostPageState extends State<PostPage> {
               child: const Text('예'),
             ),
           ],
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (canPop) async {
-        await _onWillPop();
-        },
-      child: Scaffold(
-        appBar: PostAppBar(
-            titleController: titleController,
-            contentController: contentController,
-            postItem: widget.postItem),
-        body: PostBody(
-          titleController: titleController,
-          contentController: contentController,
-          postItem: widget.postItem,
-        ),
-      ),
+        )
     );
   }
 }

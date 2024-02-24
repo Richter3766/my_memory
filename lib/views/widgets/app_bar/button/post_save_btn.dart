@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../services/db_service.dart';
-import '../../post/post_item.dart';
+import '../../../../models/post_item.dart';
 
 class PostSaveButton extends StatelessWidget {
   final TextEditingController titleController;

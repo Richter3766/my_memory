@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/pages/home.dart';
 
-class CalendarIconButton extends StatelessWidget {
-  const CalendarIconButton({super.key});
+import '../../../pages/calendar.dart';
+
+class HomeToCalendarIconButton extends StatelessWidget {
+  const HomeToCalendarIconButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +12,7 @@ class CalendarIconButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const CalendarScreen()),
         );
       },
     );

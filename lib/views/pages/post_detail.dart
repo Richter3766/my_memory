@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
-import 'package:my_memory/views/widgets/post/post_item.dart';
+import 'package:my_memory/models/post_item.dart';
 
 import 'post.dart';
 
@@ -94,19 +94,19 @@ class _DetailPageState extends State<DetailPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('삭제 확인'),
-          content: Text('정말 기억을 지우시겠습니까?'),
+          title: const Text('삭제 확인'),
+          content: const Text('정말 기억을 지우시겠습니까?'),
           actions: <Widget>[
             TextButton(
-              child: Text('아니오'),
+              child: const Text('아니오'),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             TextButton(
-              child: Text('네'),
+              child: const Text('네'),
               onPressed: () {
-                DatabaseHelper.instance.delete(widget.postItem.id); // 데이터베이스에서 항목을 삭제하는 함수
+                DatabaseHelper.instance.delete(widget.postItem.id);
                 Navigator.pop(context);
                 Navigator.pop(context);
               },

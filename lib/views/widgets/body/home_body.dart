@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
 import 'package:my_memory/views/pages/post_detail.dart';
-import './post_item.dart';
+import '../../../models/post_item.dart';
 
-class PostList extends StatefulWidget {
-  const PostList({super.key});
+class HomeBody extends StatefulWidget {
+  const HomeBody({super.key});
 
   @override
-  State<StatefulWidget> createState() => _PostListState();
+  State<StatefulWidget> createState() => _HomeBodyState();
 }
 
-class _PostListState extends State<PostList>{
+class _HomeBodyState extends State<HomeBody>{
   @override
   Widget build(BuildContext context){
     return FutureBuilder<List<PostItem>>(

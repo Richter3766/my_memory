@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import '../views/widgets/post/post_item.dart';
+import '../models/post_item.dart';
 
 class DatabaseHelper {
   static const _databaseName = "memory.db";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'button/popup_menu_btn.dart';
-import 'button/search_btn.dart';
+import 'button/home_popup_menu_btn.dart';
+import 'button/home_search_btn.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
   const HomeAppBar({super.key});
@@ -9,8 +9,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       actions:  const <Widget>[
-        SearchIconButton(),
-        CustomPopupMenuButton(),
+        HomeSearchButton(),
+        HomePopupMenuButton(),
       ],
     );
   }

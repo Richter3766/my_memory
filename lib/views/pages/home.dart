@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/app_bar/home_app_bar.dart';
-import '../widgets/post/post_list.dart';
-import '../widgets/bottom_bar/bottom_bar.dart';
-import '../widgets/bottom_bar/button/post_btn.dart';
+import '../widgets/body/home_body.dart';
+import '../widgets/bottom_bar/home_bottom_bar.dart';
+import '../widgets/bottom_bar/button/home_to_post_btn.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -30,11 +30,11 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: HomeAppBar(),
-      body: PostList(),
+      body: HomeBody(),
 
-      bottomNavigationBar: CustomBottomAppBar(),
+      bottomNavigationBar: HomeBottomAppBar(),
 
-      floatingActionButton: CustomFloatingActionButton(),
+      floatingActionButton: HomeToPostButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

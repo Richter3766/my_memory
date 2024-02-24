@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/widgets/post/post_item.dart';
+import 'package:my_memory/models/post_item.dart';
 
 class PostBody extends StatefulWidget {
   final TextEditingController titleController;

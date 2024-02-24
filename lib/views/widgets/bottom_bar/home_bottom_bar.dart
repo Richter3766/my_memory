@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'button/calendar_btn.dart';
-import './button/person_btn.dart';
+import 'button/home_to_calendar_btn.dart';
+import './button/home_to_profile_btn.dart';
 
-class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar({
+class HomeBottomAppBar extends StatelessWidget {
+  const HomeBottomAppBar({
     super.key,});
 
   @override
@@ -15,9 +15,9 @@ class CustomBottomAppBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          CalendarIconButton(),
+          HomeToCalendarIconButton(),
           SizedBox(width: 48), // FloatingActionButton의 공간을 만들기 위한 SizedBox
-          PersonIconButton(),
+          HomeToProfileButton(),
         ],
       ),
     );
