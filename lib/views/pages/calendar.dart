@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/body/calendar_body.dart';
+import '../widgets/bottom_bar/button/home_to_post_btn.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -28,31 +29,18 @@ class CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
         title: const Text('달력'),
-      ),
-      body: const Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          CalendarBody(),
-          SizedBox(height: 8.0),
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: _selectedEvents.length,
-          //     itemBuilder: (context, index) => Container(
-          //       margin: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
-          //       decoration: BoxDecoration(
-          //         border: Border.all(),
-          //         borderRadius: BorderRadius.circular(12.0),
-          //       ),
-          //       child: ListTile(
-          //         title: Text(_selectedEvents[index].toString()),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
-      ),
+        ),
+
+        body: const Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            CalendarBody(),
+          ],
+        ),
+        floatingActionButton: const HomeToPostButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat
     );
   }
 
