@@ -5,12 +5,12 @@ class DateModel extends ChangeNotifier {
   late String _date;
 
   DateModel(){
-    _date = DateFormat('yy.MM.dd').format(DateTime.now());
+    _date = DateFormat('yy.MM.dd HH:mm').format(DateTime.now());
   }
   String get date => _date;
 
   set dateString(DateTime value) {
-    _date = DateFormat('yy.MM.dd').format(value);
+    _date = DateFormat('yy.MM.dd HH:mm').format(value);
     notifyListeners();
   }
 }
