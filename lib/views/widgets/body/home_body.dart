@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../../../models/db_state.dart';
 import '../../../models/post_item.dart';
 import '../../../style/colors.dart';
-import '../list_element.dart';
+import '../home_list_element.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
@@ -42,7 +42,11 @@ class _HomeBodyState extends State<HomeBody>{
                       border: Border.all(color: listColor, width: 2.0),
                       borderRadius: BorderRadius.circular(16.0),
                     ),
-                    child: getListTile(postItem), // 리스트 타일
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5.0), // 위쪽에만 패딩 적용
+                      child: HomeListTile(postItem: postItem),
+                    ),
+
                   )
               );
             }).toList(),
