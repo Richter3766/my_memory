@@ -6,8 +6,13 @@ class HomeToProfileButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.person),
+    return FloatingActionButton(
+      shape: RoundedRectangleBorder(
+          side: const BorderSide(width: 3, color: Colors.white),
+          borderRadius: BorderRadius.circular(100)
+      ),
+      mini: true,
+      child: const Icon(Icons.person),
       onPressed: () {
         Navigator.push(
           context,

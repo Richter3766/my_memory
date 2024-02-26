@@ -4,6 +4,8 @@ import 'package:my_memory/views/pages/post_detail.dart';
 import 'package:provider/provider.dart';
 import '../../../models/db_state.dart';
 import '../../../models/post_item.dart';
+import '../../../style/colors.dart';
+import '../list_element.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
@@ -33,10 +35,15 @@ class _HomeBodyState extends State<HomeBody>{
                   );
                   databaseState.refresh();
                 },
-                child: ListTile(
-                  title: Text(postItem.date),
-                  subtitle: Text(postItem.title),
-                ),
+                  child: Container(
+                    margin: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      color: listColor,
+                      border: Border.all(color: listColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: getListTile(postItem), // 리스트 타일
+                  )
               );
             }).toList(),
           );
