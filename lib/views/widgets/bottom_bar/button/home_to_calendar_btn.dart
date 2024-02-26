@@ -9,6 +9,7 @@ class HomeToCalendarIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: "calendar",
       backgroundColor: calendarAndProfileBackgroundColor,
       foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(

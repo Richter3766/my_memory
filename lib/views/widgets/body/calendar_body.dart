@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../../models/db_state.dart';
+import '../../../models/selected_date.dart';
 import '../../pages/post_detail.dart';
 
 class CalendarBody extends StatefulWidget {
@@ -28,10 +29,14 @@ class CalendarBodyState extends State<CalendarBody> {
   @override
   void initState() {
     super.initState();
+    updateEvents();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     DatabaseState databaseState = Provider.of<DatabaseState>(context, listen: false);
     databaseState.addListener(updateEvents);
-
-    updateEvents();
   }
 
   @override
@@ -67,8 +72,9 @@ class CalendarBodyState extends State<CalendarBody> {
     selectedEvents = convertToMap(databaseState.postItems);
   }
 
-
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    DateModel dateModel = Provider.of<DateModel>(context, listen: false);
+    dateModel.dateString = selectedDay;
     setState(() {
       _selectedDay = selectedDay;
       _focusedDay = focusedDay;
@@ -90,6 +96,7 @@ class CalendarBodyState extends State<CalendarBody> {
   Widget build(BuildContext context) {
     return SingleChildScrollView( // SingleChildScrollView로 Column 위젯을 감쌌습니다.
       child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TableCalendar(
               headerStyle: const HeaderStyle(
@@ -102,6 +109,10 @@ class CalendarBodyState extends State<CalendarBody> {
               onDaySelected: _onDaySelected,
               onPageChanged: _onPageChanged,
               eventLoader: _getPostsForDay,),
+            Padding(
+                padding: const EdgeInsets.only(left: 15),
+                child: Text(getTodayText())
+            ),
             SizedBox(
                 height: 300,
                 child: _buildEventList()
@@ -126,11 +137,23 @@ class CalendarBodyState extends State<CalendarBody> {
             databaseState.refresh();
           },
           child: ListTile(
-            title: Text(postItem.date),
+            title: Text(getTodayTime(postItem)),
             subtitle: Text(postItem.title),
           ),
         );
       }).toList(),
     );
+  }
+
+  String getTodayText(){
+    DateModel dateModel = Provider.of<DateModel>(context, listen: false);
+    String prefix = dateModel.weekDay;
+    String suffix = DateFormat(', 20yy년 MM월 dd일').format(_selectedDay);
+    return prefix + suffix;
+  }
+  
+  String getTodayTime(PostItem postItem){
+    var time = postItem.date.split(' ')[1].split(':');
+    return "${time[0]}시 ${time[1]}분";
   }
 }

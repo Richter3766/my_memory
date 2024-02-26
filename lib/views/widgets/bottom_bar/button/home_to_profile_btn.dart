@@ -9,6 +9,7 @@ class HomeToProfileButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      heroTag: "profile",
       backgroundColor: calendarAndProfileBackgroundColor,
       foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(

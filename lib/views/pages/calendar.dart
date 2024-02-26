@@ -20,12 +20,6 @@ class CalendarScreenState extends State<CalendarScreen> {
     super.dispose();
   }
 
-  // void _onDaySelected(DateTime day, List events, List holidays) {
-  //   setState(() {
-  //     _selectedEvents = events;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

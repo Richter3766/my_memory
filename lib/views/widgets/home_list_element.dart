@@ -41,7 +41,7 @@ class HomeListTile extends StatelessWidget {
           Text(
             postItem.title,
             style: const TextStyle(
-              fontSize: 18.0,
+              fontSize: 16.0,
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -51,7 +51,7 @@ class HomeListTile extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 14.0,
                   fontWeight: FontWeight.normal,
                 ),
               ),

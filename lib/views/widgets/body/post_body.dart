@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:my_memory/models/post_item.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +60,7 @@ class _PostBodyState extends State<PostBody>{
               _selectDate(context);
             },
             child: Text(
-                model.date,
+                model.date.split(' ')[0],
               style: const TextStyle(
                 fontSize: 24
               ),
