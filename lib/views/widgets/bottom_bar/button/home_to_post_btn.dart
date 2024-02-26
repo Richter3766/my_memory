@@ -6,16 +6,20 @@ class HomeToPostButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-        shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 3, color: Colors.white),
-            borderRadius: BorderRadius.circular(100)
-        ),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const PostPage()),
-        ),
-        child: const Icon(Icons.add),
-    );
+    return SizedBox(
+        width: 70.0, // 원하는 너비 설정
+        height: 70.0, // 원하는 높이 설정
+        child: FloatingActionButton(
+          backgroundColor: Colors.blueAccent,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const PostPage()),
+          ),
+          child: const Icon(Icons.add, size: 45)
+    ));
   }
 }

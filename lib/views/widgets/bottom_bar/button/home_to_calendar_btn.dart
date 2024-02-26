@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../style/colors.dart';
 import '../../../pages/calendar.dart';
 
 class HomeToCalendarIconButton extends StatelessWidget {
@@ -8,8 +9,9 @@ class HomeToCalendarIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+      backgroundColor: calendarAndProfileBackgroundColor,
+      foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 3, color: Colors.white),
           borderRadius: BorderRadius.circular(100)
       ),
       onPressed: () {

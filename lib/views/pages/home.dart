@@ -45,21 +45,21 @@ class MainPage extends StatelessWidget {
       floatingActionButton: Stack(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(left: 30.0, bottom: 30.0), // 왼쪽에 10픽셀의 여유 공간을 추가
+              padding: EdgeInsets.only(left: 30.0, bottom: 20.0), // 왼쪽에 10픽셀의 여유 공간을 추가
               child: Align(
                 alignment: Alignment.bottomLeft,
                 child: HomeToCalendarIconButton(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 30.0), // 왼쪽에 10픽셀의 여유 공간을 추가
+              padding: EdgeInsets.only(bottom: 10.0), // 왼쪽에 10픽셀의 여유 공간을 추가
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: HomeToPostButton(),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 30.0, bottom: 30.0), // 오른쪽에 10픽셀의 여유 공간을 추가
+              padding: EdgeInsets.only(right: 30.0, bottom: 20.0), // 오른쪽에 10픽셀의 여유 공간을 추가
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: HomeToProfileButton(),
