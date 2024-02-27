@@ -1,71 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/models/post_item.dart';
 
+import '../../style/text_style.dart';
+import '../../utils/date_to_month_day.dart';
+import 'day_month_text.dart';
+
 class HomeListTile extends StatelessWidget {
   final PostItem postItem;
   late final String month;
   late final String day;
 
   HomeListTile({super.key, required this.postItem}) {
-    dateToMonthDay(postItem.date);
+    String monthDay = dateToMonthDay(postItem.date);
+    month = monthDay.split(' ')[0];
+    day = "${monthDay.split(' ')[1]} ";
   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: day,
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
-            ),
-            TextSpan(
-              text: month,
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.normal,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
+      title: DayMonthText(day: day, month: month),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             postItem.title,
-            style: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.normal,
-            ),
+            style: homeTitleStyle,
           ),
           if (postItem.content.isNotEmpty)
               Text(
                 postItem.content,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.normal,
-                ),
+                style: homeContentStyle,
               ),
         ],
       ),
     );
-  }
-
-  void dateToMonthDay(String dateTime) {
-    List<String> parts = dateTime.split(' ');
-    String date = parts[0];
-
-    List<String> dateParts = date.split('.');
-    month = "${dateParts[1]}월";
-    day = "${dateParts[2]}일 ";
   }
 }

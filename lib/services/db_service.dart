@@ -114,7 +114,7 @@ class DatabaseHelper {
         title: row[columnTitle],
         content: row[columnContent],
         date: row[columnDate],
-    )).toList();
+    )).toList().reversed.toList();
     return postItems;
   }
   Future<void> delete(int id) async{

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/services/db_service.dart';
 import 'package:my_memory/models/post_item.dart';
+import 'package:my_memory/style/colors.dart';
+import 'package:my_memory/style/text_style.dart';
 
 import 'post_page.dart';
 
@@ -52,41 +54,54 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   Scaffold buildScaffold(PostItem postItem) {
+    String date = "20${postItem.date.split(' ')[0]}";
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(postItem.title),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: (){
-              showDeleteConfirmDialog(context);
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PostPage(postItem: postItem),
-                ),
-              );
-              futurePostItem = loadPostItem();
-              if (mounted) {
-                setState(() {
-                  // 상태 업데이트
-                });
-              }
-            },
-          ),
-        ],
-      ),
+        backgroundColor: backgroundColor,
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: (){
+                showDeleteConfirmDialog(context);
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PostPage(postItem: postItem),
+                  ),
+                );
+                futurePostItem = loadPostItem();
+                if (mounted) {
+                  setState(() {
+                    // 상태 업데이트
+                  });
+                }
+              },
+            ),
+          ],
+        ),
       body: Column(
         children: [
-          Text(postItem.title, style: const TextStyle(fontSize: 20)),
-          Text(postItem.content),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text(date, style: detailDateStyle),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10, top: 10),
+            child: Text(postItem.title, style: detailTitleStyle),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10, left: 5),
+            child: Text(postItem.content, style: detailContentStyle),
+          ),
         ],
-      ),
+      )
     );
   }
 
