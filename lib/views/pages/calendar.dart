@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_memory/style/colors.dart';
 import '../widgets/body/calendar_body.dart';
 import '../widgets/bottom_bar/button/home_to_post_btn.dart';
 
@@ -23,8 +24,10 @@ class CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor,
         appBar: AppBar(
-        title: const Text('달력'),
+          backgroundColor: backgroundColor,
+          title: const Text('달력'),
         ),
 
         body: const Column(

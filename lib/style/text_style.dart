@@ -40,4 +40,5 @@ const TextStyle detailContentStyle = TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.normal,
   fontSize: 16,
+  height: 2
 );

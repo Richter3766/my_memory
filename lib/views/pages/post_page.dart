@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:my_memory/models/post_item.dart';
+import 'package:my_memory/style/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../models/db_state.dart';
@@ -38,6 +39,7 @@ class _PostPageState extends State<PostPage> {
         await _onPopInvoked();
         },
       child: Scaffold(
+        backgroundColor: backgroundColor,
         appBar: PostAppBar(
             titleController: titleController,
             contentController: contentController,

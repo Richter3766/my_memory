@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/widgets/app_bar/button/post_popup_btn.dart';
 import 'package:my_memory/views/widgets/app_bar/button/post_save_btn.dart';
 import 'package:my_memory/models/post_item.dart';
+
+import '../../../style/colors.dart';
 
 class PostAppBar extends StatelessWidget implements PreferredSizeWidget{
   final TextEditingController titleController;
@@ -16,14 +17,18 @@ class PostAppBar extends StatelessWidget implements PreferredSizeWidget{
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      actions: <Widget>[
-        const PostPopUpButton(),
-        PostSaveButton(
-          titleController: titleController,
-        contentController: contentController,
-          postItem: postItem,
-        )
-      ],
+        backgroundColor: backgroundColor,
+        scrolledUnderElevation: 0,
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 15),
+            child: PostSaveButton(
+              titleController: titleController,
+              contentController: contentController,
+              postItem: postItem,
+            )
+          )
+        ],
     );
   }
 

@@ -51,7 +51,7 @@ class _PostBodyState extends State<PostBody>{
   @override
   Widget build(BuildContext context) {
     return  Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(15.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -60,7 +60,7 @@ class _PostBodyState extends State<PostBody>{
               _selectDate(context);
             },
             child: Text(
-                model.date.split(' ')[0],
+                "20${model.date.split(' ')[0]}",
               style: const TextStyle(
                 fontSize: 24
               ),

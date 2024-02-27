@@ -10,6 +10,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: backgroundColor,
+      scrolledUnderElevation: 0,
       actions:  const <Widget>[
         HomeSearchButton(),
         HomePopupMenuButton(),

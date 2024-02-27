@@ -87,17 +87,18 @@ class _DetailPageState extends State<DetailPage> {
           ],
         ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(15),
             child: Text(date, style: detailDateStyle),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 10, top: 10),
+            padding: const EdgeInsets.only(top: 10, left: 15,),
             child: Text(postItem.title, style: detailTitleStyle),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 10, left: 5),
+            padding: const EdgeInsets.only(top: 10, left: 15),
             child: Text(postItem.content, style: detailContentStyle),
           ),
         ],
