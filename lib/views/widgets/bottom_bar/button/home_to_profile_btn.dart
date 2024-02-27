@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/pages/home.dart';
+import 'package:my_memory/views/pages/profile.dart';
 
 import '../../../../style/colors.dart';
 
@@ -20,7 +20,7 @@ class HomeToProfileButton extends StatelessWidget {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
         );
       },
     );
