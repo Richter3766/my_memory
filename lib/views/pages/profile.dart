@@ -11,7 +11,11 @@ class ProfilePage extends StatelessWidget{
     return const Scaffold(
       backgroundColor: backgroundColor,
       appBar: ProfileAppBar(),
-      body: ProfileBody(),
+      body: Column(
+          children: [
+            ProfileLoginBody(),
+          ]
+      ),
     );
   }
 }
