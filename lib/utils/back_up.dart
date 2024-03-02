@@ -15,7 +15,7 @@ Future<drive.DriveApi?> getDriveApi(
 
 
 //upLoad
-Future<drive.File?> upLoad(
+Future<String?> upLoad(
     {required drive.DriveApi driveApi,
       required File file,
       String? driveFileId}) async {
@@ -34,5 +34,39 @@ Future<drive.File?> upLoad(
     response = await driveApi.files.create(driveFile,
         uploadMedia: drive.Media(file.openRead(), file.lengthSync()));
   }
-  return response;
+  return response.id;
+}
+
+Future<void> getBackUp({
+  required drive.DriveApi driveApi,
+  required String fileId,
+  required String destinationPath,
+}) async {
+  drive.Media  response = await driveApi.files.get(fileId, downloadOptions: drive.DownloadOptions.fullMedia) as drive.Media;
+  final file = File(destinationPath);
+  final sink = file.openWrite();
+  response.stream.pipe(sink);
+}
+
+// 파일 ID를 로컬 파일에 저장하는 함수
+Future<void> saveFileId(String fileId, String filePath) async {
+  final file = File(filePath);
+  await file.writeAsString(fileId);
+}
+
+// 로컬 파일에서 파일 ID를 가져오는 함수
+Future<String?> getFileId(String filePath) async {
+  try {
+    final file = File(filePath);
+    return await file.readAsString();
+  } catch (e) {
+    // 파일을 읽는데 실패할 경우 예외처리를 합니다.
+    print('An error occurred while reading the file ID: $e');
+    return null;
+  }
+}
+
+void writeFile(String filePath, List<int> contents) {
+  final file = File(filePath);
+  file.writeAsBytesSync(contents, mode: FileMode.write);
 }

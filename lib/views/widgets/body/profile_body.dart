@@ -30,6 +30,7 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   @override
   void initState(){
     super.initState();
+    // join(directory.path, _databaseName)
     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) async {
       _currentUser = account;
       if (_currentUser != null) {
@@ -63,8 +64,14 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   Future<void> _handleBackUp() async{
     String dbpath = await getLocalDatabasePath();
     File file = File(dbpath);
-    upLoad(driveApi: _driveApi!, file: file);
+    String? id = await upLoad(driveApi: _driveApi!, file: file);
+    saveFileId(id!, await getLocalIDPath());
+  }
 
+  Future<void> _handleLoadBackUp() async {
+    String dbpath = await getLocalDatabasePath();
+    String? id = await getFileId(await getLocalIDPath());
+    getBackUp(driveApi: _driveApi!, fileId: id!, destinationPath: dbpath);
   }
 
   Future<String> getLocalDatabasePath() async {
@@ -72,6 +79,10 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
     return '${directory.path}/memory.db';
   }
 
+  Future<String> getLocalIDPath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return '${directory.path}/id.txt';
+  }
   @override
   Widget build(BuildContext context) {
     return _buildBody();
@@ -94,7 +105,12 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
           ),
           TextButton(
               onPressed: _handleBackUp,
-              child: const Text("백업하기"))
+              child: const Text("백업하기")
+          ),
+          TextButton(
+              onPressed: _handleLoadBackUp,
+              child: const Text("불러오기")
+          )
         ],
       );
     } else {
