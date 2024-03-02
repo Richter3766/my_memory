@@ -2,9 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_memory/models/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
-import 'package:path_provider/path_provider.dart';
 
+import 'package:provider/provider.dart';
+
+import '../../../main.dart';
+import '../../../utils/path.dart';
 import '../button/google_login_button.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 
@@ -26,10 +30,12 @@ class ProfileLoginBody extends StatefulWidget{
 class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   GoogleSignInAccount? _currentUser;
   late drive.DriveApi? _driveApi;
+  late final DatabaseState databaseState;
 
   @override
   void initState(){
     super.initState();
+    databaseState = Provider.of<DatabaseState>(context, listen: false);
     // join(directory.path, _databaseName)
     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) async {
       _currentUser = account;
@@ -39,6 +45,52 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
       }
     });
     _googleSignIn.signInSilently();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildBody();
+  }
+  Widget _buildBody() {
+    if (_currentUser != null) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          ListTile(
+            leading: GoogleUserCircleAvatar(
+              identity: _currentUser!,
+            ),
+            title: Text(_currentUser!.displayName ?? ''),
+            subtitle: Text(_currentUser!.email),
+          ),
+          TextButton(
+            onPressed: _handleSignOut,
+            child: const Text('SIGN OUT'),
+          ),
+          TextButton(
+              onPressed: _handleSaveBackUp,
+              child: const Text("백업하기")
+          ),
+          TextButton(
+              onPressed: () async {
+                await _handleLoadBackUp();
+                restartWidgetKey.currentState!.restartApp();
+          },
+              child: const Text("불러오기")
+          )
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text('로그인 할래요?'),
+          GoogleSignInButton(
+            onPressed: _handleSignIn,
+          ),
+        ],
+      );
+    }
   }
 
   Future<void> _handleSignIn() async {
@@ -61,7 +113,7 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
     });
   }
 
-  Future<void> _handleBackUp() async{
+  Future<void> _handleSaveBackUp() async{
     String dbpath = await getLocalDatabasePath();
     File file = File(dbpath);
     String? id = await upLoad(driveApi: _driveApi!, file: file);
@@ -69,60 +121,9 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   }
 
   Future<void> _handleLoadBackUp() async {
+
     String dbpath = await getLocalDatabasePath();
     String? id = await getFileId(await getLocalIDPath());
-    getBackUp(driveApi: _driveApi!, fileId: id!, destinationPath: dbpath);
-  }
-
-  Future<String> getLocalDatabasePath() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return '${directory.path}/memory.db';
-  }
-
-  Future<String> getLocalIDPath() async {
-    final directory = await getApplicationDocumentsDirectory();
-    return '${directory.path}/id.txt';
-  }
-  @override
-  Widget build(BuildContext context) {
-    return _buildBody();
-  }
-  Widget _buildBody() {
-    if (_currentUser != null) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          ListTile(
-            leading: GoogleUserCircleAvatar(
-              identity: _currentUser!,
-            ),
-            title: Text(_currentUser!.displayName ?? ''),
-            subtitle: Text(_currentUser!.email),
-          ),
-          TextButton(
-            onPressed: _handleSignOut,
-            child: const Text('SIGN OUT'),
-          ),
-          TextButton(
-              onPressed: _handleBackUp,
-              child: const Text("백업하기")
-          ),
-          TextButton(
-              onPressed: _handleLoadBackUp,
-              child: const Text("불러오기")
-          )
-        ],
-      );
-    } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text('로그인 할래요?'),
-          GoogleSignInButton(
-            onPressed: _handleSignIn,
-          ),
-        ],
-      );
-    }
+    await getBackUp(driveApi: _driveApi!, fileId: id!, destinationPath: dbpath);
   }
 }

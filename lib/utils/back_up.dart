@@ -42,7 +42,8 @@ Future<void> getBackUp({
   required String fileId,
   required String destinationPath,
 }) async {
-  drive.Media  response = await driveApi.files.get(fileId, downloadOptions: drive.DownloadOptions.fullMedia) as drive.Media;
+  drive.Media  response = await driveApi.files.
+  get(fileId, downloadOptions: drive.DownloadOptions.fullMedia) as drive.Media;
   final file = File(destinationPath);
   final sink = file.openWrite();
   response.stream.pipe(sink);
