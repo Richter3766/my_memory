@@ -1,13 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_memory/utils/back_up.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../button/google_login_button.dart';
+import 'package:googleapis/drive/v3.dart' as drive;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: [
     'email',
     'https://www.googleapis.com/auth/contacts.readonly',
-    'https://www.googleapis.com/auth/drive.file',
+    'https://www.googleapis.com/auth/drive.appdata',
   ],
 );
 
@@ -20,14 +25,17 @@ class ProfileLoginBody extends StatefulWidget{
 
 class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   GoogleSignInAccount? _currentUser;
+  late drive.DriveApi? _driveApi;
 
   @override
   void initState(){
     super.initState();
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
-      setState(() {
-        _currentUser = account;
-      });
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) async {
+      _currentUser = account;
+      if (_currentUser != null) {
+        _driveApi = await getDriveApi(_currentUser!); // driveApi를 초기화합니다.
+        setState(() {}); // 필요한 UI 변경을 트리거합니다.
+      }
     });
     _googleSignIn.signInSilently();
   }
@@ -35,8 +43,10 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   Future<void> _handleSignIn() async {
     try {
       GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      setState(() {
+      setState(() async {
         _currentUser = googleUser;
+        _driveApi = await getDriveApi(_currentUser!);
+        setState(() {});
       });
     } catch (error) {
       debugPrint(error as String?);
@@ -48,6 +58,18 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
     setState(() {
       _currentUser = null;
     });
+  }
+
+  Future<void> _handleBackUp() async{
+    String dbpath = await getLocalDatabasePath();
+    File file = File(dbpath);
+    upLoad(driveApi: _driveApi!, file: file);
+
+  }
+
+  Future<String> getLocalDatabasePath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    return '${directory.path}/memory.db';
   }
 
   @override
@@ -70,6 +92,9 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
             onPressed: _handleSignOut,
             child: const Text('SIGN OUT'),
           ),
+          TextButton(
+              onPressed: _handleBackUp,
+              child: const Text("백업하기"))
         ],
       );
     } else {

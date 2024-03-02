@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 
 import '../client/google_auth_client.dart';
+import 'package:path/path.dart' as path;
 
 Future<drive.DriveApi?> getDriveApi(
     GoogleSignInAccount googleSignInAccount) async {
@@ -22,7 +23,7 @@ Future<drive.File?> upLoad(
   drive.File driveFile = drive.File();
 
   //앱에 저장된 파일 이름 추출
-  // driveFile.name = path.basename(file.absolute.path);
+  driveFile.name = path.basename(file.absolute.path);
 
   late final drive.File response;
   if (driveFileId != null) {

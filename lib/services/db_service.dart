@@ -1,4 +1,6 @@
+
 import 'package:flutter/cupertino.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -27,7 +29,8 @@ class DatabaseHelper {
   }
 
   _initDatabase() async {
-    String path = join(await getDatabasesPath(), _databaseName);
+    final directory = await getApplicationDocumentsDirectory();
+    String path = join(directory.path, _databaseName);
     return await openDatabase(path,
         version: _databaseVersion,
         onCreate: _onCreate);
@@ -125,4 +128,5 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+
 }
