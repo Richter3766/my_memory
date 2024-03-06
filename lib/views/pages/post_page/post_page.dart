@@ -5,11 +5,11 @@ import 'package:my_memory/models/post_item.dart';
 import 'package:my_memory/style/colors.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/db_state.dart';
-import '../../models/selected_date.dart';
-import '../../services/db_service.dart';
-import '../widgets/app_bar/post_app_bar.dart';
-import '../widgets/body/post_body.dart';
+import '../../../models/db_state.dart';
+import '../../../models/selected_date.dart';
+import '../../../services/db_service.dart';
+import 'app_bar/post_app_bar.dart';
+import 'body/post_body.dart';
 
 class PostPage extends StatefulWidget{
   final PostItem? postItem;

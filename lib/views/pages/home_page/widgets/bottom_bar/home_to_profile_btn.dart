@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_memory/views/pages/profile.dart';
+import 'package:my_memory/views/pages/profile_page/profile.dart';
 
-import '../../../../style/colors.dart';
+import '../../../../../style/colors.dart';
 
 class HomeToProfileButton extends StatelessWidget {
   const HomeToProfileButton({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/style/colors.dart';
-import '../widgets/body/calendar_body.dart';
-import '../widgets/bottom_bar/button/home_to_post_btn.dart';
+import 'calendar_body.dart';
+import '../../common/home_to_post_btn.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});

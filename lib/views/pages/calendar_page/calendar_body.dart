@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../models/db_state.dart';
 import '../../../models/selected_date.dart';
-import '../../pages/post_detail.dart';
+import '../post_detail_page/post_detail.dart';
 
 class CalendarBody extends StatefulWidget {
   const CalendarBody({super.key});
@@ -42,54 +42,8 @@ class CalendarBodyState extends State<CalendarBody> {
   void dispose() {
     DatabaseState databaseState = Provider.of<DatabaseState>(context, listen: false);
     databaseState.removeListener(updateEvents);
-
     super.dispose();
   }
-
-  Map<DateTime, List<PostItem>> convertToMap(List<PostItem> postItems) {
-    Map<DateTime, List<PostItem>> map = {};
-
-    for (PostItem item in postItems) {
-      DateTime key = convertToDate(item.date);
-
-      if (map[key] == null) {
-        map[key] = [item];
-      } else {
-        map[key]?.add(item);
-      }
-    }
-
-    return map;
-  }
-
-  DateTime convertToDate(String date) {
-    return DateFormat("yy.MM.dd").parse(date);
-  }
-
-  void updateEvents() {
-    DatabaseState databaseState = Provider.of<DatabaseState>(context, listen: false);
-    selectedEvents = convertToMap(databaseState.postItems);
-  }
-
-  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
-    DateModel dateModel = Provider.of<DateModel>(context, listen: false);
-    dateModel.dateString = selectedDay;
-    setState(() {
-      _selectedDay = selectedDay;
-      _focusedDay = focusedDay;
-    });
-  }
-
-  void _onPageChanged(DateTime focusedDay) {
-    setState(() {
-      _focusedDay = focusedDay;
-    });
-  }
-
-  List<PostItem> _getPostsForDay(DateTime day) {
-    return selectedEvents[DateTime(day.year, day.month, day.day)] ?? [];
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +96,50 @@ class CalendarBodyState extends State<CalendarBody> {
         );
       }).toList(),
     );
+  }
+
+  Map<DateTime, List<PostItem>> convertToMap(List<PostItem> postItems) {
+    Map<DateTime, List<PostItem>> map = {};
+
+    for (PostItem item in postItems) {
+      DateTime key = convertToDate(item.date);
+
+      if (map[key] == null) {
+        map[key] = [item];
+      } else {
+        map[key]?.add(item);
+      }
+    }
+
+    return map;
+  }
+
+  DateTime convertToDate(String date) {
+    return DateFormat("yy.MM.dd").parse(date);
+  }
+
+  void updateEvents() {
+    DatabaseState databaseState = Provider.of<DatabaseState>(context, listen: false);
+    selectedEvents = convertToMap(databaseState.postItems);
+  }
+
+  void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
+    DateModel dateModel = Provider.of<DateModel>(context, listen: false);
+    dateModel.dateString = selectedDay;
+    setState(() {
+      _selectedDay = selectedDay;
+      _focusedDay = focusedDay;
+    });
+  }
+
+  void _onPageChanged(DateTime focusedDay) {
+    setState(() {
+      _focusedDay = focusedDay;
+    });
+  }
+
+  List<PostItem> _getPostsForDay(DateTime day) {
+    return selectedEvents[DateTime(day.year, day.month, day.day)] ?? [];
   }
 
   String getTodayText(){

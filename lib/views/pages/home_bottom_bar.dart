@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'button/home_to_calendar_btn.dart';
-import './button/home_to_profile_btn.dart';
+import 'home_page/widgets/bottom_bar/home_to_calendar_btn.dart';
+import 'home_page/widgets/bottom_bar/home_to_profile_btn.dart';
 
 class HomeBottomAppBar extends StatelessWidget {
   const HomeBottomAppBar({

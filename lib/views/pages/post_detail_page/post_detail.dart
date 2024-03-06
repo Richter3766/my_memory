@@ -4,7 +4,7 @@ import 'package:my_memory/models/post_item.dart';
 import 'package:my_memory/style/colors.dart';
 import 'package:my_memory/style/text_style.dart';
 
-import 'post_page.dart';
+import '../post_page/post_page.dart';
 
 class DetailPage extends StatefulWidget {
   final PostItem postItem;

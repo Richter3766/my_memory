@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../style/text_style.dart';
+import '../../../../../style/text_style.dart';
 
 class DayMonthText extends StatelessWidget {
   final String day;

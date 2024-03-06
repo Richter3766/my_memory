@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../style/colors.dart';
-import '../../../pages/calendar.dart';
+import '../../../../../style/colors.dart';
+import '../../../calendar_page/calendar.dart';
 
 class HomeToCalendarIconButton extends StatelessWidget {
   const HomeToCalendarIconButton({super.key});

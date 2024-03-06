@@ -21,14 +21,14 @@ class GoogleSignInButton extends StatelessWidget {
           children: <Widget>[
             const Image(
               image: AssetImage('assets/google_logo.png'), // Add your own google logo asset
-              height: 18.0,
+              height: 60.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.only(left: 5.0),
               child: Text(
-                'Sign in with Google',
+                '구글로 로그인',
                 style: TextStyle(
-                  fontSize: 16.0,
+                  fontSize: 18.0,
                   color: Colors.grey[700],
                 ),
               ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_memory/models/post_item.dart';
 
-import '../../style/text_style.dart';
-import '../../utils/date_to_month_day.dart';
+import '../../../../../style/text_style.dart';
+import '../../../../../utils/date_to_month_day.dart';
 import 'day_month_text.dart';
 
 class HomeListTile extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:my_memory/views/widgets/restart_widget.dart';
+import 'package:my_memory/views/restart_widget.dart';
 
 
 void main() async {

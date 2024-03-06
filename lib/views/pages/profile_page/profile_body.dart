@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../main.dart';
 import '../../../utils/path.dart';
-import '../button/google_login_button.dart';
+import 'google_login_button.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -63,9 +63,13 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
             title: Text(_currentUser!.displayName ?? ''),
             subtitle: Text(_currentUser!.email),
           ),
+          const SizedBox(
+            height: 200,
+          )
+          ,
           TextButton(
             onPressed: _handleSignOut,
-            child: const Text('SIGN OUT'),
+            child: const Text('로그아웃'),
           ),
           TextButton(
               onPressed: _handleSaveBackUp,
@@ -84,7 +88,12 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const Text('로그인 할래요?'),
+          const Text(
+            '로그인 할래요?',
+            style: TextStyle(
+              fontSize: 24,
+            ),
+          ),
           GoogleSignInButton(
             onPressed: _handleSignIn,
           ),

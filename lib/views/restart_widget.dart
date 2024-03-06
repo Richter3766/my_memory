@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/db_state.dart';
-import '../../models/selected_date.dart';
-import '../pages/home.dart';
+import '../models/db_state.dart';
+import '../models/selected_date.dart';
+import 'pages/home_page/home.dart';
 
 class RestartWidget extends StatefulWidget {
   final Widget rootWidget;
