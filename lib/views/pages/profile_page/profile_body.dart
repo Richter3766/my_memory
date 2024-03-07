@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_memory/models/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
+import 'package:my_memory/views/common/toast_message.dart';
 
 import 'package:provider/provider.dart';
 
@@ -123,16 +124,19 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
   }
 
   Future<void> _handleSaveBackUp() async{
+    showToastMessage("백업 시작");
     String dbpath = await getLocalDatabasePath();
     File file = File(dbpath);
     String? id = await upLoad(driveApi: _driveApi!, file: file);
     saveFileId(id!, await getLocalIDPath());
+    showToastMessage("백업 완료");
   }
 
   Future<void> _handleLoadBackUp() async {
-
+    showToastMessage("불러오기 시작");
     String dbpath = await getLocalDatabasePath();
     String? id = await getFileId(await getLocalIDPath());
     await getBackUp(driveApi: _driveApi!, fileId: id!, destinationPath: dbpath);
+    showToastMessage("불러오기 완료");
   }
 }
