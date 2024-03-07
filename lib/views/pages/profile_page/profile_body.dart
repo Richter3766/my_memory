@@ -112,7 +112,7 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
         setState(() {});
       });
     } catch (error) {
-      debugPrint(error as String?);
+      debugPrint(error as String);
     }
   }
 
