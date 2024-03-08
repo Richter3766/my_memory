@@ -5,11 +5,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_memory/models/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
 import 'package:my_memory/views/common/toast_message.dart';
+import 'package:my_memory/views/pages/profile_page/dash_board/total_memories.dart';
 
 import 'package:provider/provider.dart';
 
 import '../../../main.dart';
 import '../../../utils/path.dart';
+import 'dash_board/consecutive_days.dart';
+import 'dash_board/diary_statistics.dart';
 import 'google_login_button.dart';
 import 'package:googleapis/drive/v3.dart' as drive;
 
@@ -25,10 +28,10 @@ class ProfileLoginBody extends StatefulWidget{
   const ProfileLoginBody({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProfileLoginBodyState();
+  State<StatefulWidget> createState() => ProfileLoginBodyState();
 }
 
-class _ProfileLoginBodyState extends State<ProfileLoginBody>{
+class ProfileLoginBodyState extends State<ProfileLoginBody>{
   GoogleSignInAccount? _currentUser;
   late drive.DriveApi? _driveApi;
   late final DatabaseState databaseState;
@@ -64,10 +67,6 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
             title: Text(_currentUser!.displayName ?? ''),
             subtitle: Text(_currentUser!.email),
           ),
-          const SizedBox(
-            height: 200,
-          )
-          ,
           TextButton(
             onPressed: _handleSignOut,
             child: const Text('로그아웃'),
@@ -82,7 +81,13 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
                 restartWidgetKey.currentState!.restartApp();
           },
               child: const Text("불러오기")
-          )
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          const TotalStatistics(),
+          const ConsecutiveDays(),
+          const DiaryStatisticsScreen(),
         ],
       );
     } else {
@@ -112,7 +117,7 @@ class _ProfileLoginBodyState extends State<ProfileLoginBody>{
         setState(() {});
       });
     } catch (error) {
-      debugPrint(error as String);
+        print(error);
     }
   }
 
