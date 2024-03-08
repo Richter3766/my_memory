@@ -1,16 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_memory/models/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
-import 'package:my_memory/views/common/toast_message.dart';
 import 'package:my_memory/views/pages/profile_page/dash_board/total_memories.dart';
+import 'package:my_memory/views/pages/profile_page/profile_backup.dart';
 
 import 'package:provider/provider.dart';
 
-import '../../../main.dart';
-import '../../../utils/path.dart';
+import '../../../style/text_style.dart';
+import 'backup_last_modified.dart';
 import 'dash_board/consecutive_days.dart';
 import 'dash_board/diary_statistics.dart';
 import 'google_login_button.dart';
@@ -67,23 +65,14 @@ class ProfileLoginBodyState extends State<ProfileLoginBody>{
             title: Text(_currentUser!.displayName ?? ''),
             subtitle: Text(_currentUser!.email),
           ),
-          TextButton(
-            onPressed: _handleSignOut,
-            child: const Text('로그아웃'),
-          ),
-          TextButton(
-              onPressed: _handleSaveBackUp,
-              child: const Text("백업하기")
-          ),
-          TextButton(
-              onPressed: () async {
-                await _handleLoadBackUp();
-                restartWidgetKey.currentState!.restartApp();
-          },
-              child: const Text("불러오기")
-          ),
+          BackupAndLoadWidget(driveApi: _driveApi,),
+          const BackupDateWidget(),
           const SizedBox(
             height: 100,
+    ),
+          const Text(
+          "당신이 남긴 기억",
+          style: detailDateStyle
           ),
           const TotalStatistics(),
           const ConsecutiveDays(),
@@ -119,29 +108,5 @@ class ProfileLoginBodyState extends State<ProfileLoginBody>{
     } catch (error) {
         print(error);
     }
-  }
-
-  Future<void> _handleSignOut() async {
-    _googleSignIn.disconnect();
-    setState(() {
-      _currentUser = null;
-    });
-  }
-
-  Future<void> _handleSaveBackUp() async{
-    showToastMessage("백업 시작");
-    String dbpath = await getLocalDatabasePath();
-    File file = File(dbpath);
-    String? id = await upLoad(driveApi: _driveApi!, file: file);
-    saveFileId(id!, await getLocalIDPath());
-    showToastMessage("백업 완료");
-  }
-
-  Future<void> _handleLoadBackUp() async {
-    showToastMessage("불러오기 시작");
-    String dbpath = await getLocalDatabasePath();
-    String? id = await getFileId(await getLocalIDPath());
-    await getBackUp(driveApi: _driveApi!, fileId: id!, destinationPath: dbpath);
-    showToastMessage("불러오기 완료");
   }
 }
