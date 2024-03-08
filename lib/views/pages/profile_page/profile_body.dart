@@ -3,12 +3,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_memory/models/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
 import 'package:my_memory/views/pages/profile_page/dash_board/total_memories.dart';
-import 'package:my_memory/views/pages/profile_page/profile_backup.dart';
+import 'package:my_memory/views/pages/profile_page/back_up/profile_backup.dart';
 
 import 'package:provider/provider.dart';
 
 import '../../../style/text_style.dart';
-import 'backup_last_modified.dart';
+import 'back_up/backup_last_modified.dart';
 import 'dash_board/consecutive_days.dart';
 import 'dash_board/diary_statistics.dart';
 import 'google_login_button.dart';

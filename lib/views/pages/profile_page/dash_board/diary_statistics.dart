@@ -72,11 +72,6 @@ class DiaryStatisticsScreenState extends State<DiaryStatisticsScreen> {
       '토': 0,
     };
 
-    // 포스트의 날짜를 기반으로 요일을 계산하고, 해당 요일의 카운트를 증가시킵니다.
-    // posts.forEach((post) {
-    //   String dayOfWeek = getDayOfWeek(post); // 날짜로부터 요일을 얻는 함수를 구현하세요.
-    //   countMap[dayOfWeek]++;
-    // });
     for (var post in databaseState.postItems) {
       DateFormat format = DateFormat('yy.MM.dd HH:mm');
       DateTime dateTime = format.parse(post.date);
