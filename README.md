@@ -1,6 +1,6 @@
 # my_memory
 
-a diary app designed to capture my memories and recollections.
+a diary app designed to capture my memories and recollections.   
 자세한 설명은 노션 페이지를 참고해주세요
 
 
