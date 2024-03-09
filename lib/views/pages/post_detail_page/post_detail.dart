@@ -59,6 +59,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
         backgroundColor: backgroundColor,
         appBar: AppBar(
+          scrolledUnderElevation: 0,
           backgroundColor: backgroundColor,
           actions: <Widget>[
             IconButton(
@@ -86,23 +87,23 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ],
         ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15),
-            child: Text(date, style: detailDateStyle),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 15,),
-            child: Text(postItem.title, style: detailTitleStyle),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10, left: 15),
-            child: Text(postItem.content, style: detailContentStyle),
-          ),
-        ],
-      )
+      body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text(date, style: detailDateStyle),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10, left: 15,),
+                child: Text(postItem.title, style: detailTitleStyle),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 15),
+                  child: Text(postItem.content, style: detailContentStyle)),
+            ],
+          ))
     );
   }
 

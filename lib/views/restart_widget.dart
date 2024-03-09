@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_memory/provider/calendar_day.dart';
 import 'package:provider/provider.dart';
 
-import '../models/db_state.dart';
-import '../models/selected_date.dart';
+import '../provider/db_state.dart';
+import '../provider/selected_date.dart';
 import 'pages/home_page/home.dart';
 
 class RestartWidget extends StatefulWidget {
@@ -45,6 +46,7 @@ class MyMemory extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => DateModel()),
         ChangeNotifierProvider(create: (context) => DatabaseState()..refresh()),
+        ChangeNotifierProvider(create: (context) => CalendarState()),
       ],
       child: const HomePage(),
     );

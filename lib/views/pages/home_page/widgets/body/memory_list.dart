@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../models/db_state.dart';
+import '../../../../../provider/db_state.dart';
 import '../../../../../models/post_item.dart';
 import '../../../../../services/db_service.dart';
 import '../../../../../style/colors.dart';
 import '../../../post_detail_page/post_detail.dart';
 import 'home_list_element.dart';
+import 'package:provider/provider.dart';
 
 class HomeMemoryList extends StatelessWidget {
-  final DatabaseState databaseState;
 
-  const HomeMemoryList({super.key, required this.databaseState});
+  const HomeMemoryList({super.key});
 
   @override
   Widget build(BuildContext context) {
+    DatabaseState databaseState = Provider.of<DatabaseState>(context);
     return Expanded(
       child: FutureBuilder<List<PostItem>>(
         future: DatabaseHelper.instance.getAllPostItems(),

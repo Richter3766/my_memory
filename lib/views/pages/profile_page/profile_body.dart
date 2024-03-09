@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:my_memory/models/db_state.dart';
+import 'package:my_memory/provider/db_state.dart';
 import 'package:my_memory/utils/back_up.dart';
 import 'package:my_memory/views/pages/profile_page/dash_board/total_memories.dart';
 import 'package:my_memory/views/pages/profile_page/back_up/profile_backup.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../models/db_state.dart';
+import '../../../../provider/db_state.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../style/text_style.dart';

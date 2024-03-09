@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../models/db_state.dart';
+import '../../../../provider/db_state.dart';
 import 'package:provider/provider.dart';
 
 class DiaryStatisticsScreen extends StatefulWidget {

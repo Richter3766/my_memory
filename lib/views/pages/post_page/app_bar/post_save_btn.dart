@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/db_state.dart';
-import '../../../../models/selected_date.dart';
+import '../../../../provider/db_state.dart';
+import '../../../../provider/selected_date.dart';
 import '../../../../services/db_service.dart';
 import '../../../../models/post_item.dart';
 

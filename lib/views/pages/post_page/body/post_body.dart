@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_memory/models/post_item.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../models/selected_date.dart';
+import '../../../../provider/selected_date.dart';
 
 class PostBody extends StatefulWidget {
   final TextEditingController titleController;
