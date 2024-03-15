@@ -1,16 +1,7 @@
 # my_memory
 
-a diary app designed to capture my memories and recollections.
+a diary app designed to capture my memories and recollections.   
+자세한 설명은 노션 페이지를 참고해주세요
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+노션 페이지: https://reflective-mint-a5f.notion.site/f4b87132a6f543c6a85433b2c586323f
