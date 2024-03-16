@@ -57,6 +57,12 @@ class ConsecutiveDaysState extends State<ConsecutiveDays> {
     // 오늘 날짜를 기준으로 연속된 일자 계산
     DateTime today = DateTime.now();
     int consecutiveDays = 0;
+    if(dates.any((date) => date.year == today.year && date.month == today.month && date.day == today.day)){
+      consecutiveDays++;
+    }
+    today = today.subtract(const Duration(days: 1));
+
+    // while (dates.any((date) => date.year == today.year && date.month == today.month && date.day == today.day)) {
     while (dates.any((date) => date.year == today.year && date.month == today.month && date.day == today.day)) {
       consecutiveDays++;
       today = today.subtract(const Duration(days: 1));  // 이전 날짜로 이동
@@ -64,4 +70,6 @@ class ConsecutiveDaysState extends State<ConsecutiveDays> {
 
     return consecutiveDays;
   }
+
+
 }
